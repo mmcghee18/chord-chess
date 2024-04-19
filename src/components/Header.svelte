@@ -2,13 +2,13 @@
 	import wordmark from "$svg/wordmark.svg";
 </script>
 
-<header>
+<!-- <header>
 	<div class="wordmark">
 		<a href="https://pudding.cool" aria-label="The Pudding" target="_self"
 			>{@html wordmark}</a
 		>
 	</div>
-</header>
+</header> -->
 
 <style>
 	.wordmark {
