@@ -7,27 +7,34 @@
 
 <Midi bind:currentNotes bind:history />
 
-<div>
-	<p>notes being played:</p>
-	<ul>
-		{#each currentNotes as note}
-			<li>{note}</li>
-		{/each}
-	</ul>
-</div>
+<section>
+	<div>
+		<p>notes being played:</p>
+		<ul class="current">
+			{#each currentNotes as note}
+				<li>{note}</li>
+			{/each}
+		</ul>
+	</div>
 
-<div>
-	<p>chord history:</p>
-	<ul>
-		{#each history as chord}
-			<li>{chord.join(", ")}</li>
-		{/each}
-	</ul>
-</div>
+	<div>
+		<p>chord history:</p>
+		<ul>
+			{#each history as chord}
+				<li>{chord.join(", ")}</li>
+			{/each}
+		</ul>
+	</div>
+</section>
 
 <style>
-	div {
+	section {
+		display: flex;
+		justify-content: space-between;
 		max-width: 600px;
 		margin: auto;
+	}
+	.current {
+		color: cornflowerblue;
 	}
 </style>
