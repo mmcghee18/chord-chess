@@ -2,6 +2,9 @@
 	import { onMount } from "svelte";
 
 	export let currentNotes;
+	export let history;
+
+	const GAP = 500;
 
 	const handleMidi = (message) => {
 		const data = message.data;
@@ -12,6 +15,15 @@
 
 		if (command === 0x90 && velocity > 0) {
 			currentNotes = [...currentNotes, noteName];
+
+			let originalLength = currentNotes.length;
+
+			setTimeout(() => {
+				const newLength = currentNotes.length;
+				if (originalLength === newLength) {
+					history = [...history, currentNotes];
+				}
+			}, GAP);
 		} else if (command === 0x80 || (command === 0x90 && velocity === 0)) {
 			currentNotes = currentNotes.filter((n) => n !== noteName);
 		}
