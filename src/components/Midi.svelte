@@ -12,10 +12,9 @@
 		const command = data[0] & 0xf0;
 		const note = data[1];
 		const velocity = data[2];
-		const noteName = getNoteName(note);
 
 		if (command === 0x90 && velocity > 0) {
-			currentNotes = [...currentNotes, `${noteName} (${note})`];
+			currentNotes = [...currentNotes, note];
 
 			let originalLength = currentNotes.length;
 
@@ -27,29 +26,11 @@
 				}
 			}, GAP);
 		} else if (command === 0x80 || (command === 0x90 && velocity === 0)) {
-			currentNotes = currentNotes.filter((n) => n !== `${noteName} (${note})`);
+			currentNotes = currentNotes.filter((n) => n !== note);
 		}
 	};
 
-	const getNoteName = (noteNumber) => {
-		const notes = [
-			"C",
-			"C#",
-			"D",
-			"D#",
-			"E",
-			"F",
-			"F#",
-			"G",
-			"G#",
-			"A",
-			"A#",
-			"B"
-		];
-		const octave = Math.floor(noteNumber / 12) - 1;
-		const noteIndex = noteNumber % 12;
-		return notes[noteIndex] + octave;
-	};
+
 
 	onMount(() => {
 		if (navigator.requestMIDIAccess) {
